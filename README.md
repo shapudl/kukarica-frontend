@@ -1,4 +1,4 @@
-# KUKARICA
+# KUKARICA (http://kukarica.netlify.app)
 
 #### About
 React web application made for a recruitment task.
