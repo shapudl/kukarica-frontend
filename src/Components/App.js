@@ -1,5 +1,6 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
+import { QueryClientProvider, QueryClient} from "react-query";
 import "./App.scss";
 import RootLayout from "../Pages/Layout/RootLayout";
 import AuthPage from "../Pages/AuthPage";
@@ -9,6 +10,8 @@ import NotFoundPage from "../Pages/Error/NotFoundPage";
 
 
 export default function App(){
+
+    const queryClient = new QueryClient();
 
     const router = createBrowserRouter([
         {
@@ -40,6 +43,8 @@ export default function App(){
 
 
     return(
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+        </QueryClientProvider>
     )
 }

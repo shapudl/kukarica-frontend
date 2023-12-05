@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import RecipeDetails from "../../Components/Recipes/RecipeDetails";
 
 export default function RecipeDetailsPage(){
 
@@ -11,6 +12,7 @@ export default function RecipeDetailsPage(){
     return (
         <div className="app">
             <h1>Recipe Details</h1>
+            <RecipeDetails recipeId={id} />
         </div>
     )
 }
