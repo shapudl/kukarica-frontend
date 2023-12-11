@@ -1,9 +1,9 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import { QueryClientProvider, QueryClient} from "react-query";
-import "./App.scss";
 import RootLayout from "../Pages/Layout/RootLayout";
-import AuthPage from "../Pages/AuthPage";
+import AuthPage, {action as authAction} from "../Pages/AuthPage";
+import { action as logoutAction } from "../Pages/LogoutPage";
 import DashboardPage from "../Pages/Recipes/DashboardPage";
 import RecipeDetailsPage from "../Pages/Recipes/RecipeDetailsPage";
 import NotFoundPage from "../Pages/Error/NotFoundPage";
@@ -16,14 +16,14 @@ export default function App(){
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Navigate to="/auth" replace />
+            element: <Navigate to="/auth?mode=login" replace />
         },
         { 
             path: "/auth",
             id: "auth",
             element: <RootLayout />,
             children: [
-                { index: true, element: <AuthPage/>}
+                { index: true, element: <AuthPage/>, action: authAction}
             ]
         },
         {
@@ -36,6 +36,10 @@ export default function App(){
             ]
         },
         {
+            path: "/logout",
+            action: logoutAction
+        },
+        {
             path: "*",
             element: <NotFoundPage />,
         },
@@ -44,7 +48,7 @@ export default function App(){
 
     return(
         <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
+            <RouterProvider router={router} /> 
         </QueryClientProvider>
     )
 }
