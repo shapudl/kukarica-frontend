@@ -7,6 +7,7 @@ import { action as logoutAction } from "../Pages/LogoutPage";
 import DashboardPage from "../Pages/Recipes/DashboardPage";
 import RecipeDetailsPage from "../Pages/Recipes/RecipeDetailsPage";
 import NotFoundPage from "../Pages/Error/NotFoundPage";
+import GlobalStyles from '../Styles/GlobalStyles';
 
 
 export default function App(){
@@ -48,6 +49,7 @@ export default function App(){
 
     return(
         <QueryClientProvider client={queryClient}>
+            <GlobalStyles />
             <RouterProvider router={router} /> 
         </QueryClientProvider>
     )
