@@ -35,5 +35,23 @@ export const fetchRecipeById = async (recipeId) => {
     return response.json();
   };
 
+  export const login =  async (authData) => {
+    const response = await fetch(
+        "https://login-zazjbx7nka-uc.a.run.app/",
+        {
+            method: "POST", 
+            headers: 
+            {
+                "authId" : "OwqXLfHm5ATR8pgL4PC2y0PbuGu2",
+                "Content-type" : "application/json"
+            },
+            body: JSON.stringify(authData),
+            redirect: "follow"
+        });
 
-  
+
+    if (!response.ok) {
+      throw new Error(`Error while trying to login`);
+    }
+    return response.json();
+  };

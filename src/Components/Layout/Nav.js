@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink }  from "react-router-dom";
+import { NavLink, Form}  from "react-router-dom";
 
 export default function NavBar(){
     return (
@@ -12,6 +12,9 @@ export default function NavBar(){
                 <li>
                     <NavLink className={({isActive}) => ( isActive ? "active" : "" )} to="/recipes" end>Recipe</NavLink>
                 </li>
+                <Form action="/logout" method="POST">
+                    <button>Logout</button>
+                </Form>
             </ul>
         </nav>
     )
