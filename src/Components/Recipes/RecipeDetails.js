@@ -1,11 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { fetchRecipeById } from "../../Utils/http"; // Create this function
+import { fetchRecipeById } from "../../Utils/http"; 
+import RecipeInstructions from "./RecipeInstructions";
+import KCard from "../Styled/Card";
 
 const RecipeDetails = ({ recipeId }) => {
   
-    console.log(recipeId);
-    console.log('Recipe details')
+  console.log(recipeId);
 
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['recipe', recipeId],
@@ -27,10 +28,10 @@ const RecipeDetails = ({ recipeId }) => {
 
   if (data) {
     content = (
-      <div>
+      <KCard>
         <h2>{data.recipe.title}</h2>
-        {/* Display other details of the recipe */}
-      </div>
+        <RecipeInstructions instructions={data.recipe.instructions}/>
+      </KCard>
     );
   }
 
