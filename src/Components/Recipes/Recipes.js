@@ -2,13 +2,14 @@ import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { fetchRecipes } from "../../Utils/http";
+import KCard from "../Styled/Card";
 
 export default function Recipes(){
     /** @todo
      * 
      * 
-    ● I as application user should be redirected to dashboard page after successful login
-    ● Dashboard page should display grid or list of recipes from all users
+    + I as application user should be redirected to dashboard page after successful login
+    + Dashboard page should display grid or list of recipes from all users
     ● Displayed list / grid should have pagination or infinite scroll
     ● User should be able to search recipes by title
     ● User should have button for creating new recipe
@@ -34,13 +35,13 @@ export default function Recipes(){
     }
 
     if (data) {
-        content = (<ul className="recipes-list">
+        content = (<div className="recipes-list">
              {data.recipes.map((recipe) => (
-                <li key={recipe.id}>
+                <KCard key={recipe.id}>
                     <Link to={`${recipe.id}`}>{recipe.title}</Link>
-                </li>
+                </KCard>
              ))}
-            </ul>);
+            </div>);
     }
 
     return (
