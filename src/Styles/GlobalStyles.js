@@ -17,7 +17,6 @@ const GlobalStyles = createGlobalStyle`
     --primary-font: 'Belgrano', serif;
     --secondary-font: 'Love Ya Like A Sister', cursive;
     
-    --special-font: 'Gloria Hallelujah', cursive;
   }
 
   body {
@@ -25,6 +24,8 @@ const GlobalStyles = createGlobalStyle`
     color: var(--text-color);
 
     font-family: var(--primary-font);
+
+    text-align: center;
   }
 
   a {

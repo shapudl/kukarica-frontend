@@ -6,7 +6,7 @@ export default function NotFoundPage() {
         <div centered={true}>
             <h1>Oops! You seem to be lost.</h1>
             <p>Find your way again</p>
-            <Link to='/'>WAY ... ... ... </Link>
+            <Link to='/'>... ... ... WAY ... ... ... </Link>
         </div>
     )
 }
