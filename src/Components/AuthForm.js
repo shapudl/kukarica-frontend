@@ -5,7 +5,7 @@ import KButton from "./Styled/Button";
 
 function AuthForm() {
 
-  const KFormCard = styled.form`
+  const KFormCard = styled.div`
   
     background-color: var(--color-white);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -20,6 +20,7 @@ function AuthForm() {
     justify-items: center;
     justify-content: center;
     align-items: center;
+    text-align: center;
 
     & p {
       display: flex;
@@ -43,8 +44,8 @@ function AuthForm() {
 
 
   return (
-    <>
-      <KFormCard method="post" className="form">
+    <KFormCard>
+      <Form method="post" className="form">
         <h1>{ isLogin ? 'Log in' : 'Create a new user'}</h1>
         { !isLogin && <p>
           <label htmlFor="name">Name</label>
@@ -66,8 +67,8 @@ function AuthForm() {
           </KButton>
           <KButton>Save</KButton>
         </KActions>
-      </KFormCard>
-    </>
+      </Form>
+    </KFormCard>
   );
 }
 

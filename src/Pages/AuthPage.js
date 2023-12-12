@@ -1,10 +1,10 @@
 import React from "react";
 import AuthForm from "../Components/AuthForm"
-import { login } from "../Utils/http";
+import { login, createUser } from "../Utils/http";
 import { redirect } from "react-router";
 
 
-export default function Auth(){
+export default function AuthPage(){
 
     return (
         <div className="app">
@@ -26,47 +26,32 @@ export async function action({request}) {
     }
 
     console.log(authData);
-    console.log('afasdf');
 
     if (mode === "login") {
-        const response = await fetch(
-            "https://login-zazjbx7nka-uc.a.run.app/",
-            {
-                method: "POST", 
-                headers: 
-                {
-                    "authId" : "OwqXLfHm5ATR8pgL4PC2y0PbuGu2",
-                    "Content-type" : "application/json"
-                },
-                body: JSON.stringify(authData)
-            });
-    
-    
-        if (!response.ok) {
-          throw new Error(`Error while trying to login`);
-        }
-
-        // save user id to local.storage 
-
-        console.log(response.json)
-
-        const responseData = await response.json(); 
-        console.log(responseData);
-
-        console.log(responseData.appUser.id);
+        
+        const responseData = await login(authData); 
 
         if (responseData.appUser.id) {
             localStorage.setItem("userId", responseData.appUser.id)
         }
 
-
         return redirect("/recipes")
 
-    } else {
+    } else if (mode === "signup"){
+
+        const createData = { ...authData, name: data.get("name") }
+        console.log(createData);
+
         // send create request
-        // handle errors
+        const response = await createUser(createData);
+
         // redirect to login
+        return redirect("/")
+    } else {
+
+        throw new Error('Invalid user input');
     }
+
 
 
 }
