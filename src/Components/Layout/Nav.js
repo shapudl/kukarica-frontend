@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Form}  from "react-router-dom";
+import { NavLink, Form, useRouteLoaderData}  from "react-router-dom";
 import KButton from "../Styled/Button";
 import styled from "styled-components";
 
@@ -17,18 +17,21 @@ export default function NavBar(){
         }
     `;
 
+    const token = useRouteLoaderData("root");
+    console.log(token);
+
+    const logoutForm = token && 
+            (<Form action="/logout" method="POST">
+                <KButton>Logout</KButton>
+            </Form>)
+
     return (
         <KNavigation>
             <ul className="nav-items">
                 <li>
-                    <NavLink className={({isActive}) => ( isActive ? "active" : "" )} to="/auth" end>Authorization</NavLink>
+                    <NavLink className={({isActive}) => ( isActive ? "active" : "" )} to="/recipes" end>Recipes</NavLink>
                 </li>
-                <li>
-                    <NavLink className={({isActive}) => ( isActive ? "active" : "" )} to="/recipes" end>Recipe</NavLink>
-                </li>
-                <Form action="/logout" method="POST">
-                    <KButton>Logout</KButton>
-                </Form>
+                {logoutForm}
             </ul>
         </KNavigation>
     )

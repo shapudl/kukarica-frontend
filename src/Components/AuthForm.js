@@ -37,7 +37,7 @@ function AuthForm() {
   `;
 
   const [searchParams] = useSearchParams();
-  const isLogin = searchParams.get("mode")  === "login";
+  const isLogin = !searchParams.get("mode") || searchParams.get("mode")  === "login";
 
   let secondModeText = isLogin ? 'Create new user' : 'Login';
   let secondMode = isLogin ? "signup" : "login"; 

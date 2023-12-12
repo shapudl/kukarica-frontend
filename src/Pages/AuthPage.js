@@ -1,10 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import AuthForm from "../Components/AuthForm"
 import { login, createUser } from "../Utils/http";
-import { redirect } from "react-router";
+import { redirect, useNavigate, useRouteLoaderData } from "react-router";
 
 
 export default function AuthPage(){
+
+    const navigate = useNavigate();
+    const token = useRouteLoaderData("root");
+
+    useEffect(() => {
+        if (token) {
+        navigate("/recipes");
+        }
+    }, [token, navigate]);
+
 
     return (
         <div className="app">

@@ -4,10 +4,12 @@ import { QueryClientProvider, QueryClient} from "react-query";
 import RootLayout from "../Pages/Layout/RootLayout";
 import AuthPage, {action as authAction} from "../Pages/AuthPage";
 import { action as logoutAction } from "../Pages/LogoutPage";
-import DashboardPage from "../Pages/Recipes/DashboardPage";
 import RecipeDetailsPage from "../Pages/Recipes/RecipeDetailsPage";
+import RecipesListPage from "../Pages/Recipes/RecipesListPage";
 import NotFoundPage from "../Pages/Error/NotFoundPage";
 import GlobalStyles from '../Styles/GlobalStyles';
+import { checkAuthLoader, tokenLoader } from "../Utils/auth";
+import RecipesLayout from "../Pages/Layout/RecipesLayout";
 
 
 export default function App(){
@@ -17,23 +19,26 @@ export default function App(){
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Navigate to="/auth?mode=login" replace />
-        },
-        { 
-            path: "/auth",
-            id: "auth",
+            id: "root",
+            loader: tokenLoader,
             element: <RootLayout />,
             children: [
-                { index: true, element: <AuthPage/>, action: authAction}
-            ]
-        },
-        {
-            path: "/recipes",
-            id: "recipes",
-            element: <RootLayout />,
-            children: [
-                { index: true, element: <DashboardPage/> },
-                { path: ":id", element: <RecipeDetailsPage/> }
+                { 
+                    index: true,
+                    id: "auth",
+                    element: <AuthPage />,
+                    action: authAction
+                },
+                {
+                    path: "/recipes",
+                    id: "recipes",
+                    element: <RecipesLayout />,
+                    loader: checkAuthLoader,
+                    children: [
+                        { index: true, element: <RecipesListPage/> },
+                        { path: "/recipes/:id", element: <RecipeDetailsPage/> }
+                    ]
+                },
             ]
         },
         {
